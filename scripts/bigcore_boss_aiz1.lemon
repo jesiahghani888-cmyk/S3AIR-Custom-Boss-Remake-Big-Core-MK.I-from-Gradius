@@ -13,7 +13,7 @@
 */
 
 // Sine wave lookup table (256 entries, values -40 to +40 scaled by 256)
-define s8[256] BigCore.SIN_TABLE =
+constant array<s8>[256] BigCore.SIN_TABLE =
 {
 	 0,  1,  2,  3,  4,  5,  6,  6,  7,  8,  9, 10, 11, 11, 12, 13,
 	14, 14, 15, 16, 17, 17, 18, 18, 19, 20, 20, 21, 21, 22, 22, 23,
@@ -23,7 +23,7 @@ define s8[256] BigCore.SIN_TABLE =
 	 6,  5,  4,  3,  2,  1,  0, -1, -2, -3, -4, -5, -6, -6, -7, -8,
 	-9,-10,-11,-11,-12,-13,-14,-14,-15,-16,-17,-17,-18,-18,-19,-20,
 	-20,-21,-21,-22,-22,-23,-23,-23,-24,-24,-24,-25,-25,-25,-25,-25,
-	-25,-25,-25,-25,-25,-25,-25,-25,-25,-24,-24,-24,-23,-23,-23,-22,
+	-25,-25,-25,-25,-25,-25,-25,-25,-24,-24,-24,-23,-23,-23,-22,
 	-22,-21,-21,-20,-20,-19,-18,-18,-17,-17,-16,-15,-14,-14,-13,-12,
 	-11,-11,-10, -9, -8, -7, -6, -6, -5, -4, -3, -2, -1,  0,  1,  2,
 	 3,  4,  5,  6,  6,  7,  8,  9, 10, 11, 11, 12, 13, 14, 14, 15,
@@ -49,7 +49,7 @@ function void BigCore.Update()
 		bigcore.timer = 0
 		objA0.velocity.x = 0
 		objA0.velocity.y = 0
-		Audio.playAudio("destroy_the_core", AudioContext.CONTEXT_SOUND)
+		Audio.playAudio("destroy_the_core", 0x01)
 		
 		AddScoreForBossEnemy()
 	}
@@ -141,7 +141,7 @@ function void BigCore.UpdateFiringLaser()
 	{
 		// Spawn laser child object offset to the left of the core
 		spawnChildObject(0x068c12, 0x00, -48, 0)
-		Audio.playAudio("laser_beam", AudioContext.CONTEXT_SOUND)
+		Audio.playAudio("laser_beam", 0x01)
 	}
 
 	// Return to active state after 60 frames

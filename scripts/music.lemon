@@ -2,10 +2,15 @@
 /*
 	music.lemon
 	Sound and music overrides for the Big Core MK.I boss mod.
+
 	Audio keys (defined in audio/audio_replacements.json):
 	  "aircraft_carrier"  - Boss battle BGM (replaces MUSIC_MINIBOSS / MUSIC_MINIBOSS_2)
 	  "destroy_the_core"  - Victory jingle played on boss defeat
-	  "laser_beam"        - Laser-fire sound effect (replaces SFX 0x4d in AIZ1 boss fight)
+	  "laser_beam"        - Laser-fire sound effect
+
+	Note: "destroy_the_core" and "laser_beam" are played directly via
+	Audio.playAudio in bigcore_boss_aiz1.lemon, so they do not need
+	to be remapped here.
 */
 function u64 Standalone.getModdedSoundKey(u64 soundKey, u8 sfxId, u8 soundRegType)
 {
@@ -15,10 +20,6 @@ function u64 Standalone.getModdedSoundKey(u64 soundKey, u8 sfxId, u8 soundRegTyp
 		// Replace the mini-boss music tracks with the Gradius Aircraft Carrier theme
 		if (sfxId == MUSIC_MINIBOSS || sfxId == MUSIC_MINIBOSS_2)
 			return "aircraft_carrier"
-		
-		// Note: "destroy_the_core" and "laser_beam" are now played directly via Audio.playAudio
-		// in bigcore_boss_aiz1.lemon, so we don't need to remap them here unless we want to
-		// catch other instances of those sound IDs.
 	}
 	return base.Standalone.getModdedSoundKey(soundKey, sfxId, soundRegType)
 }

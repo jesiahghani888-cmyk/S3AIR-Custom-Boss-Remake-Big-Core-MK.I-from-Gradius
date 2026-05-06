@@ -1,3 +1,4 @@
+//# script-feature-level(2)
 /*
 	boss_aiz1.lemon
 	Hooks into the original AIZ Act 1 boss functions to replace the
