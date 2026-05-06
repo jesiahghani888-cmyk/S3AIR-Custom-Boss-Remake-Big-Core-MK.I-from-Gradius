@@ -13,8 +13,6 @@
 */
 
 // Sine wave lookup table (256 entries, values -40 to +40 scaled by 256)
-// We use a simple integer approximation: sin_table[i] = round(40 * sin(i * 2pi / 256))
-// Encoded as s8 values (range -40 to 40)
 define s8[256] BigCore.SIN_TABLE =
 {
 	 0,  1,  2,  3,  4,  5,  6,  6,  7,  8,  9, 10, 11, 11, 12, 13,
@@ -41,33 +39,18 @@ function void BigCore.Update()
 {
 	if (mod_bossbar_active)
 	{
-		boss.max_hits = 6 // Set max hits for Bossbar mod
-	}
-
-	// If Stone 3 A.I.R. is active, we might want to disable this boss or modify its behavior.
-	// For now, we'll just log a warning if both are active, as direct conflict resolution is complex.
-	if (mod_stone3air_active)
-	{
-		log("Warning: Big Core MK.I mod and Stone 3 A.I.R. are both active. Potential conflicts may occur.")
+		boss.max_hits = 8 // Set max hits for Bossbar mod
 	}
 
 	// Defeat check: transition to defeat state once
 	if (boss.remaining_hits == 0 && bigcore.state != 4)
 	{
-		if (mod_bossbar_active)
-		{
-			// Notify Bossbar mod of boss defeat, if it has a specific function for it
-			// For example: Bossbar.BossDefeated()
-			log("Bossbar: Big Core MK.I defeated.")
-		}
 		bigcore.state = 4
 		bigcore.timer = 0
 		objA0.velocity.x = 0
 		objA0.velocity.y = 0
-		playSound(0x6e)
+		Audio.playAudio("destroy_the_core", AudioContext.CONTEXT_SOUND)
 		
-		// Spawn boss explosion generator
-
 		AddScoreForBossEnemy()
 	}
 
@@ -158,7 +141,7 @@ function void BigCore.UpdateFiringLaser()
 	{
 		// Spawn laser child object offset to the left of the core
 		spawnChildObject(0x068c12, 0x00, -48, 0)
-		playSound(0x4d)
+		Audio.playAudio("laser_beam", AudioContext.CONTEXT_SOUND)
 	}
 
 	// Return to active state after 60 frames

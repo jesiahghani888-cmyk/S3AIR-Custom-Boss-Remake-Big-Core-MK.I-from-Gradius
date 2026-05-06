@@ -31,7 +31,7 @@ include music
 // --- Mod Compatibility Checks ---
 function void Mod.OnGamePostInit()
 {
-	mod_bosswarnings_active = Mods.isModActive("s3air_bosswarnings")
+	mod_bosswarnings_active = Mods.isModActive("BossWarning") || Mods.isModActive("s3air_bosswarnings")
 	mod_bossbar_active    = Mods.isModActive("Bossbar")
-	mod_stone3air_active  = Mods.isModActive("agent-stone-sonic-3-hazelspooder")
+	mod_stone3air_active  = Mods.isModActive("Stone 3 A.I.R.")
 }

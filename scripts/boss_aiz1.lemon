@@ -16,7 +16,14 @@
 //# address-hook(0x068a24) end(0x068a32)
 function void Boss.AIZ1.BaseUpdate()
 {
-	BigCore.Update()
+	if (global.zone_act == 0x0000 || level.boss_encounter == 1)
+	{
+		BigCore.Update()
+	}
+	else
+	{
+		base.Boss.AIZ1.BaseUpdate()
+	}
 }
 
 
@@ -26,7 +33,7 @@ function void fn068a46()
 {
 	setupObjectAttributesFull(0x068ffe)
 
-	boss.remaining_hits = 6
+	boss.remaining_hits = 8
 	level.boss_encounter = 1
 
 	requestLoadingPatterns(0x5a)
@@ -63,11 +70,12 @@ function void fn068a6e()
 	{
 		if (mod_bosswarnings_active)
 		{
-			// Trigger Boss Warnings mod
-			// Assuming Boss Warnings mod listens for a specific global or event
-			// For now, we'll just log it. Actual integration might require calling a specific function.
-			// For example: BossWarnings.Trigger("Big Core MK.I")
-			log("Boss Warnings: Triggered for Big Core MK.I")
+			System.setGlobalVariableValueByName("bossWarningMod.forceNoSlowdown", 1)
+			System.setGlobalVariableValueByName("bossWarningMod.canFadeOutMusic", 1)
+			System.getGlobalVariableValueByName("bossWarningMod.warningType")
+			System.callFunctionByName("bossWarningMod.createFreedomPlanet2FireExplosion")
+			System.setGlobalVariableValueByName("bossWarningMod.canDoBossWarning", 1)
+			System.callFunctionByName("bossWarningMod.createWarningEffect")
 		}
 		// Lock the camera and start the Big Core intro fly-in
 		objA0.base_state = 0x04

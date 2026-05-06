@@ -4,7 +4,6 @@
 	Custom sprite rendering for the Big Core MK.I boss mod.
 	Overrides Standalone.onWriteToSpriteTable to draw Big Core sprites
 	in place of the original AIZ1 boss sprites.
-
 	Sprite keys (defined in sprites/boss.json):
 	  bigcore_intro          - Intro animation frame
 	  bigcore_normal         - Standard idle/moving frame
@@ -16,7 +15,6 @@
 	  bigcore_broken_bottoml - Broken bottom-left quarter
 	  bigcore_broken_bottomr - Broken bottom-right quarter
 */
-
 function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 {
 	// Only apply custom rendering in Angel Island Zone Act 1
@@ -53,7 +51,6 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			}
 			return true
 		}
-
 		// -------------------------------------------------------
 		// Laser Projectile
 		// update_address 0x068c12 = overridden fn068c12 (laser)
@@ -63,7 +60,6 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			Renderer.drawCustomSprite("bigcore_laser", px, py, 0x00, 0, renderQueue)
 			return true
 		}
-
 		// -------------------------------------------------------
 		// Broken Pieces (Giblets) after defeat
 		// update_address 0x085102 = debris tumble update
@@ -82,7 +78,6 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 				Renderer.drawCustomSprite("bigcore_broken_bottomr", px, py, 0x00, 0, renderQueue)
 			return true
 		}
-
 		// -------------------------------------------------------
 		// Suppress original boss sub-objects (hide them entirely)
 		// -------------------------------------------------------
@@ -95,6 +90,5 @@ function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 			return true  // Return true without drawing = invisible
 		}
 	}
-
 	return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
 }
