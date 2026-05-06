@@ -1,3 +1,4 @@
+//# script-feature-level(2)
 /*
 	bigcore_boss_aiz1.lemon
 	Big Core MK.I boss logic for AIZ Act 1.
@@ -66,11 +67,7 @@ function void BigCore.Update()
 		playSound(0x6e)
 		
 		// Spawn boss explosion generator
-		spawnSimpleChildObjects(0x083d84, 1)
-		if (_equal())
-		{
-			u8[A1 + 0x2c] = 0x10
-		}
+
 		AddScoreForBossEnemy()
 	}
 
