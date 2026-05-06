@@ -12,6 +12,9 @@
 */
 
 // --- Global Variables ---
+global bool mod_bosswarnings_active
+global bool mod_bossbar_active
+global bool mod_stone3air_active
 global u8  bigcore.state
 global u8  bigcore.timer
 global u8  bigcore.laser_timer
@@ -23,3 +26,11 @@ include boss_aiz1
 include bigcore_boss_aiz1
 include render
 include music
+
+// --- Mod Compatibility Checks ---
+function void Mod.OnGamePostInit()
+{
+	mod_bosswarnings_active = Mods.isModActive("s3air_bosswarnings")
+	mod_bossbar_active    = Mods.isModActive("Bossbar")
+	mod_stone3air_active  = Mods.isModActive("agent-stone-sonic-3-hazelspooder")
+}

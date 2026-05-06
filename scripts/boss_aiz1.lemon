@@ -61,6 +61,14 @@ function void fn068a6e()
 
 	if (camera.position.x.u16 >= D5.u16)
 	{
+		if (mod_bosswarnings_active)
+		{
+			// Trigger Boss Warnings mod
+			// Assuming Boss Warnings mod listens for a specific global or event
+			// For now, we'll just log it. Actual integration might require calling a specific function.
+			// For example: BossWarnings.Trigger("Big Core MK.I")
+			log("Boss Warnings: Triggered for Big Core MK.I")
+		}
 		// Lock the camera and start the Big Core intro fly-in
 		objA0.base_state = 0x04
 		bigcore.state    = 1

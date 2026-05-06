@@ -38,9 +38,27 @@ define s8[256] BigCore.SIN_TABLE =
 // Main update function called every frame from Boss.AIZ1.BaseUpdate()
 function void BigCore.Update()
 {
+	if (mod_bossbar_active)
+	{
+		boss.max_hits = 6 // Set max hits for Bossbar mod
+	}
+
+	// If Stone 3 A.I.R. is active, we might want to disable this boss or modify its behavior.
+	// For now, we'll just log a warning if both are active, as direct conflict resolution is complex.
+	if (mod_stone3air_active)
+	{
+		log("Warning: Big Core MK.I mod and Stone 3 A.I.R. are both active. Potential conflicts may occur.")
+	}
+
 	// Defeat check: transition to defeat state once
 	if (boss.remaining_hits == 0 && bigcore.state != 4)
 	{
+		if (mod_bossbar_active)
+		{
+			// Notify Bossbar mod of boss defeat, if it has a specific function for it
+			// For example: Bossbar.BossDefeated()
+			log("Bossbar: Big Core MK.I defeated.")
+		}
 		bigcore.state = 4
 		bigcore.timer = 0
 		objA0.velocity.x = 0

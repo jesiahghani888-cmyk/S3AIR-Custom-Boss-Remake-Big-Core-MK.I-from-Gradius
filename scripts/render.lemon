@@ -19,7 +19,7 @@
 function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 {
 	// Only apply custom rendering in Angel Island Zone Act 1
-	if (global.zone_act == 0x0000)
+	if (global.zone_act == 0x0000 && !mod_stone3air_active)
 	{
 		// -------------------------------------------------------
 		// Main Boss Body
