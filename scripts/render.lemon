@@ -1,0 +1,78 @@
+function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
+{
+       //Big Core MK.I (Intro)
+       if (objA0.update_address == 0x0684EC)
+       {
+            Renderer.drawCustomSprite("bigcore_intro", px, py, 0x00, 0, renderQueue)
+            return true
+       }
+      //a
+      if (objA0.update_address == 0x0686E8)
+      {
+           Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+           return true
+      }
+     //a
+     if (objA0.update_address == 0x06872C)
+     {
+          Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+          return true
+     }
+    //a
+    if (objA0.update_address == 0x068720)
+    {
+         Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+         return true
+    }
+   //a
+   if (objA0.update_address == 0x01E780)
+   {
+        Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+        return true
+   }
+  //a
+  if (objA0.update_address == 0x068690)
+  {
+       Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+       return true
+  }
+ //a
+ if (objA0.update_address == 0x06880A)
+ {
+      Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+      return true
+ }
+//a
+if (objA0.update_address == 0x068E8C)
+{
+     Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+     return true
+}
+//Big Core MK.I (Normal)
+if (objA0.update_address == 0x068A24)
+{
+     Renderer.drawCustomSprite("bigcore_normal", px, py, 0x00, 0, renderQueue)
+     return true
+}
+//f
+if (global.zone_act == 0x0000)
+if (objA0.update_address == 0x085668)
+{
+     Renderer.drawCustomSprite("z", px, py, 0x00, 0, renderQueue)
+     return true
+}
+//a
+if (objA0.update_address == 0x085102)
+{
+     Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+     return true
+}
+//a
+if (objA0.update_address == 0x068C12)
+{
+     Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
+     return true
+}
+
+return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
+}

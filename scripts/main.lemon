@@ -1,1 +1,3 @@
-
+include boss_aiz1
+include render
+include music
