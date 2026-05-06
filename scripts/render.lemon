@@ -1,78 +1,99 @@
+/*
+	render.lemon
+	Custom sprite rendering for the Big Core MK.I boss mod.
+	Overrides Standalone.onWriteToSpriteTable to draw Big Core sprites
+	in place of the original AIZ1 boss sprites.
+
+	Sprite keys (defined in sprites/boss.json):
+	  bigcore_intro          - Intro animation frame
+	  bigcore_normal         - Standard idle/moving frame
+	  bigcore_hits           - Hit-flash frame (second frame in BigCore.png)
+	  bigcore_laser          - Laser beam projectile (BigCore_Laser.png)
+	  bigcore_defeat         - Defeat/explosion frame
+	  bigcore_broken_topl    - Broken top-left quarter
+	  bigcore_broken_topr    - Broken top-right quarter
+	  bigcore_broken_bottoml - Broken bottom-left quarter
+	  bigcore_broken_bottomr - Broken bottom-right quarter
+*/
+
 function bool Standalone.onWriteToSpriteTable(s16 px, s16 py, u16 renderQueue)
 {
-       //Big Core MK.I (Intro)
-       if (objA0.update_address == 0x0684EC)
-       {
-            Renderer.drawCustomSprite("bigcore_intro", px, py, 0x00, 0, renderQueue)
-            return true
-       }
-      //a
-      if (objA0.update_address == 0x0686E8)
-      {
-           Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-           return true
-      }
-     //a
-     if (objA0.update_address == 0x06872C)
-     {
-          Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-          return true
-     }
-    //a
-    if (objA0.update_address == 0x068720)
-    {
-         Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-         return true
-    }
-   //a
-   if (objA0.update_address == 0x01E780)
-   {
-        Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-        return true
-   }
-  //a
-  if (objA0.update_address == 0x068690)
-  {
-       Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-       return true
-  }
- //a
- if (objA0.update_address == 0x06880A)
- {
-      Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-      return true
- }
-//a
-if (objA0.update_address == 0x068E8C)
-{
-     Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-     return true
-}
-//Big Core MK.I (Normal)
-if (objA0.update_address == 0x068A24)
-{
-     Renderer.drawCustomSprite("bigcore_normal", px, py, 0x00, 0, renderQueue)
-     return true
-}
-//f
-if (global.zone_act == 0x0000)
-if (objA0.update_address == 0x085668)
-{
-     Renderer.drawCustomSprite("z", px, py, 0x00, 0, renderQueue)
-     return true
-}
-//a
-if (objA0.update_address == 0x085102)
-{
-     Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-     return true
-}
-//a
-if (objA0.update_address == 0x068C12)
-{
-     Renderer.drawCustomSprite("a", px, py, 0x00, 0, renderQueue)
-     return true
-}
+	// Only apply custom rendering in Angel Island Zone Act 1
+	if (global.zone_act == 0x0000)
+	{
+		// -------------------------------------------------------
+		// Main Boss Body
+		// update_address 0x068a24 = Boss.AIZ1.BaseUpdate (active)
+		// update_address 0x0684ec = intro update address
+		// -------------------------------------------------------
+		if (objA0.update_address == 0x068a24 || objA0.update_address == 0x0684ec)
+		{
+			if (bigcore.state == 1)
+			{
+				// Intro fly-in
+				Renderer.drawCustomSprite("bigcore_intro", px, py, 0x00, 0, renderQueue)
+			}
+			else if (bigcore.state == 4)
+			{
+				// Defeat pose
+				Renderer.drawCustomSprite("bigcore_defeat", px, py, 0x00, 0, renderQueue)
+			}
+			else
+			{
+				// Normal or hit-flash: alternate every 4 frames while hit state is active
+				if (objA0.state > 0 && (objA0.state & 0x02) != 0)
+				{
+					Renderer.drawCustomSprite("bigcore_hits", px, py, 0x00, 0, renderQueue)
+				}
+				else
+				{
+					Renderer.drawCustomSprite("bigcore_normal", px, py, 0x00, 0, renderQueue)
+				}
+			}
+			return true
+		}
 
-return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
+		// -------------------------------------------------------
+		// Laser Projectile
+		// update_address 0x068c12 = overridden fn068c12 (laser)
+		// -------------------------------------------------------
+		if (objA0.update_address == 0x068c12 && level.boss_encounter == 1)
+		{
+			Renderer.drawCustomSprite("bigcore_laser", px, py, 0x00, 0, renderQueue)
+			return true
+		}
+
+		// -------------------------------------------------------
+		// Broken Pieces (Giblets) after defeat
+		// update_address 0x085102 = debris tumble update
+		// subtype2c encodes which quarter piece to draw
+		// -------------------------------------------------------
+		if (objA0.update_address == 0x085102 && level.boss_encounter == 1)
+		{
+			u8 piece = objA0.subtype2c
+			if (piece == 0x00)
+				Renderer.drawCustomSprite("bigcore_broken_topl",    px, py, 0x00, 0, renderQueue)
+			else if (piece == 0x02)
+				Renderer.drawCustomSprite("bigcore_broken_topr",    px, py, 0x00, 0, renderQueue)
+			else if (piece == 0x04)
+				Renderer.drawCustomSprite("bigcore_broken_bottoml", px, py, 0x00, 0, renderQueue)
+			else if (piece == 0x06)
+				Renderer.drawCustomSprite("bigcore_broken_bottomr", px, py, 0x00, 0, renderQueue)
+			return true
+		}
+
+		// -------------------------------------------------------
+		// Suppress original boss sub-objects (hide them entirely)
+		// -------------------------------------------------------
+		if (objA0.update_address == 0x0686e8 ||   // Exhaust flames child
+			objA0.update_address == 0x06872c ||   // Rocket launchers
+			objA0.update_address == 0x068720 ||   // Flamethrower nozzle
+			objA0.update_address == 0x06880a ||   // Rocket exhaust flame
+			objA0.update_address == 0x068e8c)     // Blimp intro object
+		{
+			return true  // Return true without drawing = invisible
+		}
+	}
+
+	return base.Standalone.onWriteToSpriteTable(px, py, renderQueue)
 }

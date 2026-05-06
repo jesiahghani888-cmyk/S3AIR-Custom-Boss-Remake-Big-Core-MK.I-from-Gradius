@@ -1,3 +1,25 @@
+/*
+	main.lemon
+	Entry point for the Big Core MK.I custom boss mod.
+	Targets: Sonic 3 A.I.R. v26.03.28.0 (MinGameVersion)
+
+	Global Variable Reference:
+	  bigcore.state       u8  - Boss state machine (0=idle, 1=intro, 2=active, 3=laser, 4=defeat)
+	  bigcore.timer       u8  - General-purpose frame counter (wraps at 255)
+	  bigcore.laser_timer u8  - Laser cooldown / firing frame counter
+	  bigcore.move_angle  u8  - Sine-wave angle for vertical oscillation (0-255)
+	  bigcore.base_y      u16 - Baseline Y position for sine-wave oscillation
+*/
+
+// --- Global Variables ---
+global u8  bigcore.state
+global u8  bigcore.timer
+global u8  bigcore.laser_timer
+global u8  bigcore.move_angle
+global u16 bigcore.base_y
+
+// --- Script Includes ---
 include boss_aiz1
+include bigcore_boss_aiz1
 include render
 include music
