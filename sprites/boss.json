@@ -1,1 +1,11 @@
-
+{
+	"bigcore_intro": { "File": "BigCore_Intro.png", "Rect": "0,0,96,64", "Center": "48,32" },
+	"bigcore_normal": { "File": "BigCore.png", "Rect": "0,0,96,64", "Center": "48,32" },
+	"bigcore_hits": { "File": "BigCore.png", "Rect": "96,0,96,64", "Center": "48,32" },
+	"bigcore_laser": { "File": "BigCore_Laser.png", "Rect": "0,0,30,4", "Center": "15,2" },
+	"bigcore_defeat": { "File": "BigCore_Defeat.png", "Rect": "0,0,96,64", "Center": "48,32" },
+	"bigcore_broken_topl": { "File": "BigCore_Broken.png", "Rect": "0,0,48,32", "Center": "24,16" },
+	"bigcore_broken_topr": { "File": "BigCore_Broken.png", "Rect": "48,0,48,32", "Center": "24,16" },
+	"bigcore_broken_bottoml": { "File": "BigCore_Broken.png", "Rect": "0,32,48,32", "Center": "24,16" },
+	"bigcore_broken_bottomr": { "File": "BigCore_Broken.png", "Rect": "48,32,48,32", "Center": "24,16" },
+}
