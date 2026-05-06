@@ -4,6 +4,7 @@
 	Custom sprite rendering for the Big Core MK.I boss mod.
 	Overrides Standalone.onWriteToSpriteTable to draw Big Core sprites
 	in place of the original AIZ1 boss sprites.
+
 	Sprite keys (defined in sprites/boss.json):
 	  bigcore_intro          - Intro animation frame
 	  bigcore_normal         - Standard idle/moving frame
