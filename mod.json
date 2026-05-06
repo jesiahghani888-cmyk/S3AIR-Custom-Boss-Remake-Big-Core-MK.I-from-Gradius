@@ -1,0 +1,32 @@
+{
+	"Metadata":
+	{
+		"Name": "Big Core MK.I",
+		"Author": "DynamicLemon",
+		"UniqueID": "Big-Core-over-AIZ1-Boss",
+		"Description": "This Mod is That Replaces the Fire Breath in Angel Island Zone Act 1 Boss with Big Core MK.I from Gradius.",
+		"URL": "",
+		"ModVersion": "6.0",
+		"MinGameVersion": "26.03.28.0"
+	},
+	"OtherMods": [
+		{
+			"ID": "s3air_bosswarnings",
+			"DisplayName": "Boss Warnings",
+			"IsRequired": "0",
+			"Priority": "Higher"
+		},
+		{
+			"ID": "agent-stone-sonic-3-hazelspooder",
+			"DisplayName": "Stone 3 A.I.R.",
+			"IsRequired": "0",
+			"Priority": "Lower"
+		},
+		{
+			"ID": "Bossbar",
+			"DisplayName": "Bossbar",
+			"IsRequired": "0",
+			"Priority": "Lower"
+		}
+	]
+}
